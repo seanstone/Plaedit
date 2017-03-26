@@ -29,7 +29,7 @@ TileShader::TileShader()
                     case 4: tileCoordData[i][j][k] = vec2(1, 0); break;
                     case 5: tileCoordData[i][j][k] = vec2(1, 1); break;
                 }
-                texCoordData[i][j][k] = vec2(0, 0);
+                texCoordData[i][j][k] = vec2(8, 4);
             }
 
     glBindBuffer(GL_ARRAY_BUFFER, mapCoord);

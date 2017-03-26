@@ -30,6 +30,7 @@ MainWindow::MainWindow()
 {
 	width = WINDOW_WIDTH;
 	height = WINDOW_HEIGHT;
+	SDL_GL_SetAttribute(SDL_GL_FRAMEBUFFER_SRGB_CAPABLE, 1);
 	createWindow(width, width, "PulsarEngine Example");
 
 	bool result = true;
@@ -42,6 +43,12 @@ MainWindow::MainWindow()
 		terminate();
 		exit(0);
 	}
+
+	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
+	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 2);
+	glEnable(GL_MULTISAMPLE);
+
+	glEnable(GL_FRAMEBUFFER_SRGB);
 }
 
 MainWindow::~MainWindow()
@@ -50,7 +57,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::render()
 {
-	glClearColor(0, 1, 0, 1);
+	glClearColor(0, 0, 0, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	shader->render();
 }
@@ -82,7 +89,7 @@ void MainWindow::handleEvent(SDL_Event* event)
 		{
 			printf("wheel: %d, %d\r\n", event->wheel.x, event->wheel.y);
 			float newzoom = zoom * (1 + event->wheel.y * .1);
-			if (newzoom > 0.001 && newzoom < 0.2)
+			if (newzoom > 0.01 && newzoom < 0.2)
 			{
 				zoom = newzoom;
 				printf("zoom: %f\r\n", zoom);

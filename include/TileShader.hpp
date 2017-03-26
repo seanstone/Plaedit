@@ -23,8 +23,8 @@ public:
 	VBO         texCoord    = 0;
     Texture*    tileTexture = NULL;
 
-	int mapWidth = 50;
-	int mapHeight = 50;
+	int mapWidth = 128;
+	int mapHeight = 64;
 	vec2 mapOffset = vec2(0, 0);
 };
 
