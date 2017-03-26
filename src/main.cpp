@@ -20,13 +20,17 @@ public:
 	void update();
 	void handleEvent(SDL_Event* event);
 
+	int width, height;
+
 protected:
 	TileShader* shader;
 };
 
 MainWindow::MainWindow()
 {
-	createWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "PulsarEngine Example");
+	width = WINDOW_WIDTH;
+	height = WINDOW_HEIGHT;
+	createWindow(width, width, "PulsarEngine Example");
 
 	bool result = true;
 	shader = new TileShader;
@@ -52,11 +56,12 @@ void MainWindow::render()
 }
 
 float zoom = 0.1;
+vec3 offset = vec3(-5, -5, 0);
 
 void MainWindow::update()
 {
 	shader->Shader::bind();
-	mat4 projection = scale(vec3(zoom)) * scale(vec3(1, -1, 1)) * translate(vec3(-5, -5, 0));
+	mat4 projection = scale(vec3(zoom)) * scale(vec3(1, -1, 1)) * translate(offset);
 	shader->setParameter("projection", projection);
 	shader->Shader::unbind();
 
@@ -71,16 +76,33 @@ void MainWindow::update()
 
 void MainWindow::handleEvent(SDL_Event* event)
 {
-	if(event->type == SDL_MOUSEWHEEL)
+	switch (event->type)
 	{
-		printf("wheel: %d, %d\r\n", event->wheel.x, event->wheel.y);
-		float newzoom = zoom * (1 + event->wheel.y * .1);
-		if (newzoom > 0.001 && newzoom < 0.2)
+		case SDL_MOUSEWHEEL:
 		{
-			zoom = newzoom;
-			printf("zoom: %f\r\n", zoom);
+			printf("wheel: %d, %d\r\n", event->wheel.x, event->wheel.y);
+			float newzoom = zoom * (1 + event->wheel.y * .1);
+			if (newzoom > 0.001 && newzoom < 0.2)
+			{
+				zoom = newzoom;
+				printf("zoom: %f\r\n", zoom);
+			}
 		}
-
+		case SDL_MOUSEBUTTONDOWN:
+		{
+			if (event->button.button == SDL_BUTTON_LEFT)
+			{
+				printf("left: %d, %d\r\n", event->button.x, event->button.y);
+			}
+			else if (event->button.button == SDL_BUTTON_RIGHT)
+			{
+				printf("right: %d, %d\r\n", event->button.x, event->button.y);
+				float dx = (1 - 2 * (float)event->button.x / width) / zoom;
+				float dy = (1 - 2 * (float)event->button.y / height) / zoom;
+				offset += vec3(dx, dy, 0);
+				printf("pan: %f, %f\r\n", dx, dy);
+			}
+		}
 	}
 }
 
