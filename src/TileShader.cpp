@@ -2,9 +2,6 @@
 
 using namespace Pulsar;
 
-int mapWidth = 5;
-int mapHeight = 5;
-
 TileShader::TileShader()
 {
     glGenVertexArrays(1, &vao);
@@ -32,7 +29,7 @@ TileShader::TileShader()
                     case 4: tileCoordData[i][j][k] = vec2(1, 0); break;
                     case 5: tileCoordData[i][j][k] = vec2(1, 1); break;
                 }
-                texCoordData[i][j][k] = vec2(i, j);
+                texCoordData[i][j][k] = vec2(0, 0);
             }
 
     glBindBuffer(GL_ARRAY_BUFFER, mapCoord);
@@ -47,15 +44,14 @@ TileShader::TileShader()
     glBufferData(GL_ARRAY_BUFFER, mapWidth * mapHeight * 6 * sizeof(vec2), texCoordData, GL_STATIC_DRAW);
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
 
-    //glBindBuffer(GL_ARRAY_BUFFER, 0);
-
     Image image;
     image.load("data/texture/simearth_2_5_ng_by_nine999jellyfish-da8n0np.png");
     tileTexture = new Texture;
-    tileTexture->bind();
     tileTexture->load(&image);
     tileTexture->enableMipmap(false);
 
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    tileTexture->unbind();
     glBindVertexArray(0);
 }
 
@@ -76,8 +72,6 @@ void TileShader::render()
 	glEnableVertexAttribArray(1);
 	glEnableVertexAttribArray(2);
 
-    tileTexture->bind();
-
     glBindBuffer(GL_ARRAY_BUFFER, mapCoord);
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
     glBindBuffer(GL_ARRAY_BUFFER, tileCoord);
@@ -85,9 +79,12 @@ void TileShader::render()
     glBindBuffer(GL_ARRAY_BUFFER, texCoord);
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
 
+    tileTexture->bind();
+
 	glDrawArrays(GL_TRIANGLES, 0, mapWidth * mapHeight * 6);
-	glBindVertexArray(0);
+
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
 	glDisableVertexAttribArray(2);
+    glBindVertexArray(0);
 }

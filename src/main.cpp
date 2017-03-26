@@ -18,6 +18,7 @@ public:
 	~MainWindow();
 	void render();
 	void update();
+	void handleEvent(SDL_Event* event);
 
 protected:
 	TileShader* shader;
@@ -37,11 +38,6 @@ MainWindow::MainWindow()
 		terminate();
 		exit(0);
 	}
-
-	shader->Shader::bind();
-	shader->setParameter("tileStrobe", vec2(0.1f, 0.1f));
-	shader->setParameter("projection", mat4(0.1, 0, 0, 0, 0, 0.1, 0, 0, 0, 0, 0.1, 0, 0, 0, 0, 1));
-	shader->Shader::unbind();
 }
 
 MainWindow::~MainWindow()
@@ -55,14 +51,36 @@ void MainWindow::render()
 	shader->render();
 }
 
+float zoom = 0.1;
+
 void MainWindow::update()
 {
+	shader->Shader::bind();
+	mat4 projection = scale(vec3(zoom)) * scale(vec3(1, -1, 1)) * translate(vec3(-5, -5, 0));
+	shader->setParameter("projection", projection);
+	shader->Shader::unbind();
+
 	// if(getKeyState(Key::Esc) == true)
 	// 	exit(0);
 
 	vec2 mousePos = getMousePos();
 	if(getMouseState(Button::ButtonLeft) == true)
 	{
+	}
+}
+
+void MainWindow::handleEvent(SDL_Event* event)
+{
+	if(event->type == SDL_MOUSEWHEEL)
+	{
+		printf("wheel: %d, %d\r\n", event->wheel.x, event->wheel.y);
+		float newzoom = zoom * (1 + event->wheel.y * .1);
+		if (newzoom > 0.001 && newzoom < 0.2)
+		{
+			zoom = newzoom;
+			printf("zoom: %f\r\n", zoom);
+		}
+
 	}
 }
 
