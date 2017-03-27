@@ -5,7 +5,7 @@ using namespace Pulsar;
 TileShader::TileShader()
 {
     FILE *pla;
-    pla = fopen("../../SimEarth/Planets/stag11.PLA","rb");  // r for read, b for binary
+    pla = fopen("../../SimEarth/Planets/earth.PLA","rb");  // r for read, b for binary
 
     char terrain[mapWidth][mapHeight][2];
     fseek(pla, 0x0080, SEEK_SET);
@@ -46,6 +46,26 @@ TileShader::TileShader()
                     case 5: texCoordData[i][j][k] = vec2(10, 4); break; // Forests
                     case 6: texCoordData[i][j][k] = vec2(11, 4); break; // Jungle
                     case 7: texCoordData[i][j][k] = vec2(8, 4); break; // Swamp
+                }
+                switch (terrain[i][j][1] & 0x1F)
+                {
+                    case 0x04 ... 0x07: texCoordData[i][j][k] = vec2(0, 1); break;
+                    case 0x08 ... 0x0B: texCoordData[i][j][k] = vec2(0, 2); break;
+                    case 0x0C ... 0x0F: texCoordData[i][j][k] = vec2(0, 3); break;
+                    case 0x10 ... 0x13: texCoordData[i][j][k] = vec2(0, 4); break;
+                    case 0x14 ... 0x17: texCoordData[i][j][k] = vec2(0, 5); break;
+                    case 0x18 ... 0x1B: texCoordData[i][j][k] = vec2(0, 6); break;
+                    case 0x1C ... 0x1F: texCoordData[i][j][k] = vec2(0, 8); break;
+                }
+                switch ((terrain[i][j][1] >> 5) & 0b111)
+                {
+                    //case 1: case 3: case 4: case 7: texCoordData[i][j][k] = vec2(0, 0); break;
+                    //  texCoordData[i][j][k] = vec2(1, 3); break;
+                    // case 3: texCoordData[i][j][k] = vec2(1, 4); break;
+                    // case 4: texCoordData[i][j][k] = vec2(1, 5); break;
+                    // case 5: texCoordData[i][j][k] = vec2(1, 6); break;
+                    // case 6: texCoordData[i][j][k] = vec2(1, 8); break;
+                    // case 7: texCoordData[i][j][k] = vec2(1, 4); break;
                 }
             }
 
