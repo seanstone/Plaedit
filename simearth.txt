@@ -1,0 +1,239 @@
+Animal Habitats
+Lightly inhabited
+Graphs
+Range for rainfall, air temp, sea temp, altitude
+Icons
+Map colors
+Ocean
+Options & Windows
+Speed
+Date
+DataSound
+Globe
+Gaia
+History
+Report: Life quality, Work, Eff, Energy, Invest, Current Task,
+        Biomass, Viability, Growth, Highest Intelligence,
+		Goal Biomass, Goal Pop
+		Major Daisy, Empty Space, Solar input increase
+Model slider lock
+Formation of Ocean
+Creation of planet, cooling
+Death of planet
+Labels on map
+Cambarian scenario, continential drift script, progress
+Game Hardness, Energy
+Contitential drift history
+Tabs (View or not)
+Tech Advancement
+Nuclear War, World War
+History start
+Investment
+Senient type icon
+
+GameMode, CurrentScenario
+
+==================== HEADER ===============================
+
+0000/01 (~)
+
+0002-0017 [Planet Name]
+
+0018-0040 (?)
+
+0041-0048 ["CITYMCRP"] (~)
+
+0049-007F (?)
+
+==================== MAP ==================================
+
+0080-407F (2000*2) [Altitude/Biome (XX)][City (XX)]
+(Biome) 00-1F = No Biome  
+        20-3F = Arctic    
+		40-5F = Boreal    
+		60-7F = Desert    
+		80-9F = Grasslands
+		A0-BF = Forests   
+		C0-DF = Jungle    
+		E0-FF = Swamp     
+(City)  00 = No Sapients
+		01-03 = No Tech
+		04-07 = Stone
+		08-0B = Bronze
+		0C-0F = Iron
+		10-13 = Industrial
+		14-17 = Atomic
+		18-1B = Info
+		1C-1F = Nanotech
+		20 = terraformer?
+		21 = biome factory
+		22 = oxygenator
+		23 = N2 generator
+		24 = vaporator
+		25 = CO2 generator
+		26 = terraformer?monolith
+		27 = terraformer?ice meteor
+		28 = terraformer?
+
+4080-607F (2000) [Life (XX)]
+(Life)
+
+6080-687F (800) [Ocean Temperature]
+
+6880-707F (800) [Ocean Currents]
+
+7080-787F (800) [Continental Drift]
+
+7880-807F (800) [Global Events]
+
+8080-887F (800) [Air Temperature]
+
+8880-907F (800) [Rainfall]
+
+9080-987F (800) [Air Currents]
+
+==================== PARAMETERS ===========================
+
+9880-98CF [Models]
+	9880/81 volcanic activity,
+	9882/83 erosion,
+	9884/85 meteor impacts,
+	9886/87 continental drift rate,
+	9888/89 core heat,
+	988A/8B core formation,
+	988C/8D axis tilt,
+	988E/8F ...,
+
+==================== UNKNOWN 98D0-9BDB ====================
+
+98D0-98D9 [UNKNOWN] (Random data??, Changes with time)
+98DA [UNKNOWN]
+98DB [Cambrian Scenario]
+98DC [UNKNOWN]
+
+98DD-98EC [Evolutionary Status] 01=Evolved
+98ED [Formation of life] 01 =Evolved
+98EE [Multicellar life] 01 =Evolved
+98EF [Gaia regulation] 01 =Regulated
+
+98F0/F1 [UNKNOWN] (restores to 00 00 after change in tech scale)
+98F2 [UNKNOWN] (does not restore to 00 after change in tech scale)
+
+98F3 [Interstellar Migration] 00/01
+
+98F4 [Time Scale] 00=No Game, 01=Geologic, 02=Evolution, 03=Civilization, 04=Technology, 05=Daisyworld, 06=Mars/Venus
+
+98F5 [UNKNOWN] (Crashes, Geo = 00?, changes with time)
+98F6/F7 [UNKNOWN] (changes with time) (investment?)
+98F8-98FD (UNKNOWN)(Sea Level Changes?, Life form movement?, Biome Growth?)
+98FE-9903 [UNKNOWN] (changes with time)
+9904/05 [UNKNOWN]
+
+9906/07 [Median Tech]
+
+9908/09 [UNKNOWN] (changes with time in tech scale, not in civ scale?)
+
+990A/0B [Highest Tech] 01=Stone Age 07=Nanotech Age
+
+990C-9927 [UNKNOWN] (changes with time)(Cambarian?)
+9928-992B (UNKNOWN) (usually 00 00)
+
+992C-99CB [Life Form Ratio Graph]
+	992C-9935 = Prokaryotes
+	9936-993F = Eukaryotes
+	9940-9949 = Radiates
+	994A-9953 = Arthropods
+	9954-995D = Mollusks
+	995E-9967 = Fish
+	9968-9971 = Cetaceans
+	9972-997B = Trichordates
+	997C-9985 = Insects
+	9986-998F = Amphibians
+	9990-9999 = Reptiles
+	999A-99A3 = Dinosaurs
+	99A4-99B7 = Avians
+	99A1-99B7 = Mammals
+	99B8-99C1 = Carniferns
+	99C2-99CB = Robots
+
+99CC-D1 [Altitude Level/Color tone]
+	99CC/CD Real Sea Level
+		99CD
+			00-7F = Water
+			80-FF = Land
+	99CE/CF Map Sea Level
+	99D0/D1 Small Map Sea Level
+
+99D2/D3 [Senient Type]
+
+99D4-99D7 [UNKNOWN] (Cambarian?)
+99D8/D9 [UNKNOWN] (changes with time)
+99DA-99DF [UNKNOWN]
+
+99E0-99EF [City Habitats]
+
+99F0-9A0B [Atmospheric Composition]
+
+9A0C-9A17(UNKNOWN)(Atomic Fuel/Fossil Fuel Behavior/Usage) (Sea level/ Temp etc.)
+
+9A18/19 [Population]
+
+9A20-9A2B (UNKNOWN) (Sea level/ Temp etc. !!!!/ CO2 effect)
+
+9A1D (CO2)
+
+9A2C-9A47 [Technology Graph]
+	9A2C-9A2F = Stone
+	9A30-9A33 = Bronze
+	9A34-9A37 = Iron
+	9A38-9A3B = Industrial
+	9A3C-9A3F = Atomic
+	9A40-9A43 = Info
+	9A44-9A47 = Nanotech
+
+9A48-9A9B (UNKNOWN)
+
+9A9C-9B27 [Biome Graph]
+	9A9C-9AAF = Arctic
+	9AB0-9AC3 = Boreal
+	9AC4-9AD7 = Desert
+	9AD8-9AEB = Grass
+	9AEC-9AFF = Forest
+	9B00-9B13 = Jungle
+	9B14-9B27 = Swamp
+
+9B28-9B7F (UNKNOWN)(Year?)(Temperature Level?)(Rainfall Level/Behavior?)(Icon?)(Invest?)(Map Color Tone?)
+9B80-9B85 (UNKNOWN)(Omega Budget)(Temperature Level?)(Venus?)(Game mode?)
+
+9B82 (UNKNOWN) 04=?, 05=?, 06=Stag Nation, 07=?, 08=Earth, 09=Mars, 0A=Venus, 0B=?
+
+9B84 [Hardness] 00=Sandbox, 01=Easy, 02=Average, 03=Hard
+
+9B86-9B8F [Absolute Year]
+
+9B90-9B93 (UNKNOWN)(Options and Windows?)
+
+9B94-9B95 [Maximum Energy]
+
+9B96-9BDB (UNKNOWN)
+
+==================== HISTORY ==============================
+
+9BDB-A01A [History]
+	9BDB-9C1A = War
+	9C1B-9C5A = Plague
+	9C5B-9C8A = Pollution
+	9C9B-9CDA = Sea Temp
+	9CDB-9D1A = blank?
+	9D1B-9D5A = Air Temp
+	9D5B-9D9A = Rainfall
+	9D9B-9DDA = blank?
+	9DDB-9E1A = Populate
+	9E1B-9E5A = Biomass
+	9E5B-9E9A = Diversity
+	9E9B-9EDA = Fossil fuel
+	9EDB-9F1A = Atomic Fuel
+	9F1B-9F5A = Food
+	9F5B-9F9A = CO2
+	9F9B-9FDA = O2
+	9FDB-9D1A = CH4

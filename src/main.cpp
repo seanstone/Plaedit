@@ -106,7 +106,7 @@ void MainWindow::handleEvent(SDL_Event* event)
 				printf("right: %d, %d\r\n", event->button.x, event->button.y);
 				float dx = (1 - 2 * (float)event->button.x / width) / zoom;
 				float dy = (1 - 2 * (float)event->button.y / height) / zoom;
-				offset += vec3(dx, dy, 0);
+				offset += 0.5f * vec3(dx, dy, 0);
 				printf("pan: %f, %f\r\n", dx, dy);
 			}
 		}

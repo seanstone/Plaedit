@@ -4,6 +4,13 @@ using namespace Pulsar;
 
 TileShader::TileShader()
 {
+    FILE *pla;
+    pla = fopen("../../SimEarth/Planets/stag11.PLA","rb");  // r for read, b for binary
+
+    char terrain[mapWidth][mapHeight][2];
+    fseek(pla, 0x0080, SEEK_SET);
+    fread(terrain, mapWidth * mapHeight * 2, 1, pla);
+
     glGenVertexArrays(1, &vao);
     glBindVertexArray(vao);
 
@@ -29,7 +36,17 @@ TileShader::TileShader()
                     case 4: tileCoordData[i][j][k] = vec2(1, 0); break;
                     case 5: tileCoordData[i][j][k] = vec2(1, 1); break;
                 }
-                texCoordData[i][j][k] = vec2(8, 4);
+                switch ((terrain[i][j][0] >> 5) & 0b111)
+                {
+                    case 0: texCoordData[i][j][k] = vec2(38, 20); break; // No Biome
+                    case 1: texCoordData[i][j][k] = vec2(37, 20); break; // Arctic
+                    case 2: texCoordData[i][j][k] = vec2(12, 4); break; // Boreal
+                    case 3: texCoordData[i][j][k] = vec2(7, 4); break; // Desert
+                    case 4: texCoordData[i][j][k] = vec2(9, 4); break; // Grasslands
+                    case 5: texCoordData[i][j][k] = vec2(10, 4); break; // Forests
+                    case 6: texCoordData[i][j][k] = vec2(11, 4); break; // Jungle
+                    case 7: texCoordData[i][j][k] = vec2(8, 4); break; // Swamp
+                }
             }
 
     glBindBuffer(GL_ARRAY_BUFFER, mapCoord);
